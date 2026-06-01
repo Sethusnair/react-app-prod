@@ -1,8 +1,8 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:20'
-        }
+    agent any
+
+    tools {
+        nodejs 'node20'
     }
 
     environment {
