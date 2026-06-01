@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:20'
+        }
+    }
 
     environment {
         AWS_REGION = 'ap-south-1'
@@ -10,6 +14,20 @@ pipeline {
     }
 
     stages {
+        
+        stage('Install') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'CI=true npm test -- --watchAll=false'
+            }
+        }
+
+
 
         stage('Checkout') {
             steps {
